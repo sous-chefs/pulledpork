@@ -18,6 +18,7 @@
 #
 
 default['pulledpork']['version'] = '0.7.0'
+default['pulledpork']['pp_config_path'] = '/etc/snort/pulledpork.conf'
 default['pulledpork']['artifact_url'] = 'https://pulledpork.googlecode.com/files/pulledpork-0.7.0.tar.gz'
 
 # without any rule_urls defined in this array pulled pork will fail to run
