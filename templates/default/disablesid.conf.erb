@@ -1,0 +1,9 @@
+# This file is managed by Chef.  Do not hand edit.
+#
+# Config file for pulledpork disabled sids
+
+<% node['pulledpork']['disabled_sids_hash_array'].sort_by { |hash| hash.keys[0] }.each do |disabled_sid| -%>
+# <%= disabled_sid.values[0] %>
+<%= disabled_sid.keys[0] %>
+
+<% end -%>

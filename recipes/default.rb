@@ -31,6 +31,15 @@ file "/usr/local/pulledpork-#{node['pulledpork']['version']}/pulledpork.pl" do
   mode '0755'
 end
 
+template node['pulledpork']['disablesid'] do
+  source 'disablesid.conf.erb'
+  owner 'root'
+  group 'root'
+  mode '0640'
+  notifies :run, 'execute[run_pulledpork]'
+  not_if { node['pulledpork']['disabled_sids_hash_array'].empty? }
+end
+
 template node['pulledpork']['pp_config_path'] do
   source 'pulledpork.conf.erb'
   owner 'root'

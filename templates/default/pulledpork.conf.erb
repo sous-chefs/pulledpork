@@ -18,3 +18,4 @@ distro=<%= node['pulledpork']['distro'] %>
 black_list=<%= node['pulledpork']['black_list']  %>
 IPRVersion=<%= node['pulledpork']['IPRVersion']  %>
 version=<%= node['pulledpork']['version']  %>
+<% unless node['pulledpork']['disabled_sids_hash_array'].empty? -%>disablesid=<%= node['pulledpork']['disablesid'] %><% end -%>

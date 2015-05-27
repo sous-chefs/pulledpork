@@ -24,6 +24,10 @@ default['pulledpork']['artifact_url'] = 'https://pulledpork.googlecode.com/files
 # without any rule_urls defined in this array pulled pork will fail to run
 default['pulledpork']['rule_url_array'] = []
 
+# this is an array of hashes that contains the disable rule as the key and a comment as the value.
+# Example [{'129:4:1' => 'TCP Timestamp is outside of PAWS window'}]
+default['pulledpork']['disabled_sids_hash_array'] = []
+
 default['pulledpork']['ignore'] = 'deleted.rules,experimental.rules,local.rules'
 default['pulledpork']['temp_path'] = '/tmp'
 default['pulledpork']['rule_path'] = '/etc/snort/rules/snort.rules'
@@ -36,3 +40,4 @@ default['pulledpork']['sorule_path'] = '/usr/lib/snort_dynamicrules/'
 default['pulledpork']['distro'] = 'Ubuntu-10-4'
 default['pulledpork']['black_list'] = '/etc/snort/rules/iplists/default.blacklist'
 default['pulledpork']['IPRVersion'] = '/etc/snort/rules/iplists'
+default['pulledpork']['disablesid'] = '/etc/snort/disablesid.conf'
