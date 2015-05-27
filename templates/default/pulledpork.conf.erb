@@ -1,0 +1,20 @@
+# This file is managed by Chef.  Do not hand edit.
+#
+# Config file for pulledpork
+
+<% node['pulledpork']['rule_url_array'].each do |url| -%>
+rule_url=<%= url %>
+<% end -%>
+ignore=<%= node['pulledpork']['ignore']  %>
+temp_path=<%= node['pulledpork']['temp_path']  %>
+rule_path=<%= node['pulledpork']['rule_path']  %>
+sid_msg=<%= node['pulledpork']['sid_msg']  %>
+sid_msg_version=<%= node['pulledpork']['sid_msg_version']  %>
+sid_changelog=<%= node['pulledpork']['sid_changelog']  %>
+snort_path=<%= node['pulledpork']['snort_path']  %>
+config_path=<%= node['pulledpork']['config_path']  %>
+sorule_path=<%= node['pulledpork']['sorule_path']  %>
+distro=<%= node['pulledpork']['distro'] %>
+black_list=<%= node['pulledpork']['black_list']  %>
+IPRVersion=<%= node['pulledpork']['IPRVersion']  %>
+version=<%= node['pulledpork']['version']  %>

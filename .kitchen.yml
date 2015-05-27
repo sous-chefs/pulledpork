@@ -15,5 +15,9 @@ platforms:
 suites:
 - name: default
   run_list:
+  - recipe[snort]
   - recipe[pulledpork]
-  attributes: {}
+  attributes:
+    pulledpork:
+      rule_url_array:
+        - 'https://s3.amazonaws.com/snort-org/www/rules/community/|community-rules.tar.gz|Community'
