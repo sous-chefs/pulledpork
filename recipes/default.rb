@@ -51,7 +51,7 @@ end
 cron 'pulledpork' do
   hour '12'
   minute '0'
-  command "/usr/local/bin/pulledpork.pl -c #{node['pulledpork']['pp_config_path']} -l"
+  command "/usr/local/bin/pulledpork.pl -c #{node['pulledpork']['pp_config_path']} -l; kill -SIGHUP `pidof snort`"
 end
 
 # create the sorule_path unless its managed elsewhere
