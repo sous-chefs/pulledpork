@@ -51,7 +51,7 @@ end
 cron 'pulledpork' do
   hour '12'
   minute '0'
-  command "/usr/local/bin/pulledpork.pl -c #{node['pulledpork']['config_path']} -l"
+  command "/usr/local/bin/pulledpork.pl -c #{node['pulledpork']['pp_config_path']} -l"
 end
 
 # create the sorule_path unless its managed elsewhere
@@ -73,6 +73,6 @@ end
 
 # one time pulled pork run for first install / config changes
 execute 'run_pulledpork' do
-  command "/usr/local/bin/pulledpork.pl -c #{node['pulledpork']['config_path']} -l"
+  command "/usr/local/bin/pulledpork.pl -c #{node['pulledpork']['pp_config_path']} -l"
   action :nothing
 end
