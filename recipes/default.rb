@@ -73,6 +73,6 @@ end
 
 # one time pulled pork run for first install / config changes
 execute 'run_pulledpork' do
-  command "/usr/local/bin/pulledpork.pl -c #{node['pulledpork']['pp_config_path']} -l"
+  command "/usr/local/bin/pulledpork.pl -c #{node['pulledpork']['pp_config_path']} -l; kill -SIGHUP `pidof snort`"
   action :nothing
 end
