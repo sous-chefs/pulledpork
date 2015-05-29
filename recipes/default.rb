@@ -36,7 +36,7 @@ template node['pulledpork']['disablesid'] do
   owner 'root'
   group 'root'
   mode '0640'
-  notifies :run, 'execute[run_pulledpork]'
+  notifies :run, 'bash[run_pulledpork]'
   not_if { node['pulledpork']['disabled_sids_hash_array'].empty? }
 end
 
@@ -45,7 +45,7 @@ template node['pulledpork']['pp_config_path'] do
   owner 'root'
   group 'root'
   mode '0640'
-  notifies :run, 'execute[run_pulledpork]'
+  notifies :run, 'bash[run_pulledpork]'
 end
 
 cron 'pulledpork' do
@@ -72,7 +72,10 @@ cookbook_file '/usr/lib/snort_dynamicrules/os-linux.so' do
 end
 
 # one time pulled pork run for first install / config changes
-execute 'run_pulledpork' do
-  command "/usr/local/bin/pulledpork.pl -c #{node['pulledpork']['pp_config_path']} -l; kill -SIGHUP `pidof snort`"
+bash 'run_pulledpork' do
+  code <<-EOH
+  /usr/local/bin/pulledpork.pl -c #{node['pulledpork']['pp_config_path']} -l
+  kill -SIGHUP `pidof snort`
+  EOH
   action :nothing
 end
