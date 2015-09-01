@@ -8,6 +8,7 @@ Requirements
 -----
 ### Platform
 - Ubuntu 10.04+
+- Debian
 
 ### Cookbooks
 - ark
