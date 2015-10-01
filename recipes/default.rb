@@ -17,65 +17,17 @@
 # limitations under the License.
 #
 
-# install packages needed by pulledpork
-package %w(libcrypt-ssleay-perl liblwp-useragent-determined-perl)
-
-ark 'pulledpork' do
-  url node['pulledpork']['artifact_url']
-  version node['pulledpork']['version']
-  has_binaries %w(pulledpork.pl)
-end
-
-# fix bad permissions in the tarball
-file "/usr/local/pulledpork-#{node['pulledpork']['version']}/pulledpork.pl" do
-  mode '0755'
-end
-
-template node['pulledpork']['disablesid'] do
-  source 'disablesid.conf.erb'
-  owner 'root'
-  group 'root'
-  mode '0640'
-  notifies :run, 'bash[run_pulledpork]'
-  not_if { node['pulledpork']['disabled_sids_hash_array'].empty? }
-end
-
-template node['pulledpork']['pp_config_path'] do
-  source 'pulledpork.conf.erb'
-  owner 'root'
-  group 'root'
-  mode '0640'
-  notifies :run, 'bash[run_pulledpork]'
-end
-
-cron 'pulledpork' do
-  hour '12'
-  minute '0'
-  command "/usr/local/bin/pulledpork.pl -c #{node['pulledpork']['pp_config_path']} -l; kill -SIGHUP `pidof snort`"
-end
-
-# create the sorule_path unless its managed elsewhere
-directory node['pulledpork']['sorule_path'] do
-  owner 'root'
-  group 'root'
-  mode '0755'
-  not_if { ::File.exist?(node['pulledpork']['sorule_path']) }
-end
-
-# pulled pork fails if a so rule doesn't exist in the dir.
-cookbook_file '/usr/lib/snort_dynamicrules/os-linux.so' do
-  source 'default_so_rule'
-  action :create_if_missing
-  owner 'root'
-  group 'root'
-  mode '0655'
-end
+include_recipe 'pulledpork::install'
+include_recipe 'pulledpork::configure'
 
 # one time pulled pork run for first install / config changes
 bash 'run_pulledpork' do
   code <<-EOH
-  /usr/local/bin/pulledpork.pl -c #{node['pulledpork']['pp_config_path']} -l
-  kill -SIGHUP `pidof snort`
+  /usr/local/bin/pulledpork.pl -c #{node['pulledpork']['pp_config_path']} -l;
+  service #{node['pulledpork']['snort_svc_name']} restart
   EOH
   action :nothing
 end
+
+# This is really just a cron job
+include_recipe 'pulledpork::service'
