@@ -1,4 +1,5 @@
 # chef-pulledpork
+
 [![Build Status](https://travis-ci.org/tas50/chef-pulledpork.svg?branch=master)](https://travis-ci.org/tas50/chef-pulledpork)
 [![Cookbook Version](https://img.shields.io/cookbook/v/pulledpork.svg)](https://supermarket.chef.io/cookbooks/pulledpork)
 
@@ -6,11 +7,14 @@ Chef cookbook for installing the Snort ruleset update utility Pulled Pork
 
 Requirements
 -----
-### Platform
-- Ubuntu 10.04+
-- Debian
+#### Platforms
+- Ubuntu 12.04+
+- Debian 7+
 
-### Cookbooks
+#### Chef
+- Chef 11+
+
+#### Cookbooks
 - ark
 
 Usage
@@ -22,11 +26,12 @@ You will need to set the rule_url_array attribute for pulledpork to run.  The at
 
 License & Authors
 -----------------
-- Author:: Tim Smith (<tsmith84@gmail.com>)
 
-```text
-Copyright:: 2015, Tim Smith
+**Author:**  Tim Smith (<tsmith84@gmail.com>)
 
+
+**Copyright:** 2015, Tim Smith
+```
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -39,4 +44,3 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
-
