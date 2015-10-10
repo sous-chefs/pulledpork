@@ -4,9 +4,6 @@ driver:
 provisioner:
   name: chef_zero
 
-driver_config:
-  require_chef_omnibus: true
-
 platforms:
 - name: ubuntu-14.04
   run_list:
@@ -15,6 +12,7 @@ platforms:
   run_list:
   - recipe[apt]
 - name: centos-7.1
+- name: centos-6.7
 suites:
 - name: default
   run_list:
