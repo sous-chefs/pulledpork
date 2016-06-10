@@ -1,36 +1,37 @@
 # chef-pulledpork
 
-[![Build Status](https://travis-ci.org/tas50/chef-pulledpork.svg?branch=master)](https://travis-ci.org/tas50/chef-pulledpork)
-[![Cookbook Version](https://img.shields.io/cookbook/v/pulledpork.svg)](https://supermarket.chef.io/cookbooks/pulledpork)
+[![Build Status](https://travis-ci.org/tas50/chef-pulledpork.svg?branch=master)](https://travis-ci.org/tas50/chef-pulledpork) [![Cookbook Version](https://img.shields.io/cookbook/v/pulledpork.svg)](https://supermarket.chef.io/cookbooks/pulledpork)
 
 Chef cookbook for installing the Snort ruleset update utility Pulled Pork
 
-Requirements
------
-#### Platforms
+## Requirements
+
+### Platforms
+
 - Ubuntu 12.04+
 - Debian 7+
+- RHEL 6+
 
-#### Chef
+### Chef
+
 - Chef 11+
 
-#### Cookbooks
+### Cookbooks
+
 - ark
 
-Usage
------
+## Usage
 
-Before this cookbook can run you must have a working copy of Snort.  The default attributes of this cookbook assume the snort paths from a package install as done in the snort cookbook.  If you install via source you'll want to set these attributes to the source paths.
+Before this cookbook can run you must have a working copy of Snort. The default attributes of this cookbook assume the snort paths from a package install as done in the snort cookbook. If you install via source you'll want to set these attributes to the source paths.
 
-You will need to set the rule_url_array attribute for pulledpork to run.  The attribute defaults to nil to give full control over the rules you run.  The Kitchen CI setup uses 'https://s3.amazonaws.com/snort-org/www/rules/community/|community-rules.tar.gz|Community' which provides open source community rules.
+You will need to set the rule_url_array attribute for pulledpork to run. The attribute defaults to nil to give full control over the rules you run. The Kitchen CI setup uses '<https://s3.amazonaws.com/snort-org/www/rules/community/|community-rules.tar.gz|Community>' which provides open source community rules.
 
-License & Authors
------------------
+## License & Authors
 
-**Author:**  Tim Smith (<tsmith84@gmail.com>)
+**Author:** Tim Smith ([tsmith84@gmail.com](mailto:tsmith84@gmail.com))
 
+**Copyright:** 2015-2016, Tim Smith
 
-**Copyright:** 2015, Tim Smith
 ```
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
