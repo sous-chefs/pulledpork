@@ -4,7 +4,7 @@ template node['pulledpork']['disablesid'] do
   owner 'root'
   group 'root'
   mode '0640'
-  notifies :run, 'bash[run_pulledpork]'
+  notifies :run, 'execute[run_pulledpork]'
   not_if { node['pulledpork']['disabled_sids_hash_array'].empty? }
 end
 
@@ -13,7 +13,7 @@ template node['pulledpork']['pp_config_path'] do
   owner 'root'
   group 'root'
   mode '0640'
-  notifies :run, 'bash[run_pulledpork]'
+  notifies :run, 'execute[run_pulledpork]'
 end
 
 # create the sorule_path unless its managed elsewhere

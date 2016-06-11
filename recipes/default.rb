@@ -20,13 +20,16 @@
 include_recipe 'pulledpork::install'
 include_recipe 'pulledpork::configure'
 
-# one time pulled pork run for first install / config changes
-bash 'run_pulledpork' do
-  code <<-EOH
-  /usr/local/bin/pulledpork.pl -c #{node['pulledpork']['pp_config_path']} -l;
-  service #{node['pulledpork']['snort_svc_name']} restart
-  EOH
+# for notification
+service node['pulledpork']['snort_svc_name'] do
   action :nothing
+end
+
+# one time pulled pork run for first install / config changes
+execute 'run_pulledpork' do
+  command "/usr/local/bin/pulledpork.pl -c #{node['pulledpork']['pp_config_path']} -l"
+  action :nothing
+  notifies :restart, "service[#{node['pulledpork']['snort_svc_name']}]", :immediately
 end
 
 # This is really just a cron job
