@@ -1,6 +1,6 @@
 # chef-pulledpork
 
-[![Build Status](https://travis-ci.org/tas50/chef-pulledpork.svg?branch=master)](https://travis-ci.org/tas50/chef-pulledpork) [![Cookbook Version](https://img.shields.io/cookbook/v/pulledpork.svg)](https://supermarket.chef.io/cookbooks/pulledpork)
+[![Build Status](https://travis-ci.org/sous-chefs/pulledpork.svg?branch=master)](https://travis-ci.org/sous-chefs/pulledpork) [![Cookbook Version](https://img.shields.io/cookbook/v/pulledpork.svg)](https://supermarket.chef.io/cookbooks/pulledpork)
 
 Chef cookbook for installing the Snort ruleset update utility Pulled Pork
 
@@ -8,13 +8,13 @@ Chef cookbook for installing the Snort ruleset update utility Pulled Pork
 
 ### Platforms
 
-- Ubuntu 12.04+
+- Ubuntu 14.04+
 - Debian 7+
 - RHEL 6+
 
 ### Chef
 
-- Chef 11+
+- Chef 12+
 
 ### Cookbooks
 
@@ -30,7 +30,7 @@ You will need to set the rule_url_array attribute for pulledpork to run. The att
 
 **Author:** Tim Smith ([tsmith84@gmail.com](mailto:tsmith84@gmail.com))
 
-**Copyright:** 2015-2016, Tim Smith
+**Copyright:** 2015-2018, Tim Smith
 
 ```
 Licensed under the Apache License, Version 2.0 (the "License");
