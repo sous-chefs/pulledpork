@@ -1,5 +1,3 @@
-
-
 # install packages needed by pulledpork
 package node['pulledpork']['dependencies']
 

@@ -1,5 +1,3 @@
-
-
 cron 'pulledpork' do
   hour '12'
   minute '0'

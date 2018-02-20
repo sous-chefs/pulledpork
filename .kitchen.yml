@@ -23,4 +23,4 @@ suites:
   attributes:
     pulledpork:
       rule_url_array:
-        - 'https://s3.amazonaws.com/snort-org/www/rules/community/|community-rules.tar.gz|Community'
+        - 'https://snort.org/downloads/community/|community-rules.tar.gz|Community'

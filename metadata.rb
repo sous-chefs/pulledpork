@@ -6,7 +6,7 @@ description      'Installs and Configures the Snort IDS ruleset updater Pulled P
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '2.0.0'
 
-supports 'debian', '>= 7'
+supports 'debian', '>= 7.0'
 supports 'ubuntu', '>= 12.04'
 supports 'redhat'
 supports 'centos'
