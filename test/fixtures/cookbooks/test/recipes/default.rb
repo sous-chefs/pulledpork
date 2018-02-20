@@ -1,10 +1,6 @@
 apt_update 'update'
 
-snort_install 'none' do
-  install_type node['platform'] == 'debian' ? 'compile' : 'package'
-  daq_version '2.0.6' if node['platform'] == 'debian' # They've patched the rpms adding a "-1" suffix
-  snort_version '2.9.9.0' if node['platform'] == 'debian'
-end
+snort_install 'snort'
 
 snort_config 'hello' do
   site_rules_include ['community.rules']
