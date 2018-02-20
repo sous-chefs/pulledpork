@@ -2,7 +2,7 @@
 # Cookbook Name:: pulledpork
 # Attributes:: default
 #
-# Copyright (c) 2015, Tim Smith
+# Copyright:: 2015-2018, Tim Smith
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ when 'rhel'
   default['pulledpork']['snort_svc_name'] = 'snortd'
 end
 
-default['pulledpork']['version'] = '0.7.2'
+default['pulledpork']['version'] = '0.7.3'
 default['pulledpork']['pp_config_path'] = '/etc/snort/pulledpork.conf'
 default['pulledpork']['artifact_url'] =
   'https://github.com/shirkdog/pulledpork/archive/' +
