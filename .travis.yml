@@ -1,15 +1,19 @@
 sudo: required
 dist: trusty
 
-# install the pre-release chef-dk.  Use chef-stable-precise to install the stable release
 addons:
   apt:
     sources:
-      - chef-current-precise
+      - chef-current-trusty
     packages:
       - chefdk
 
+# Don't `bundle install` which takes about 1.5 mins
 install: echo "skip bundle install"
+
+branches:
+  only:
+    - master
 
 services: docker
 
@@ -20,7 +24,6 @@ env:
   - INSTANCE=default-ubuntu-1604
   - INSTANCE=default-centos-7
 
-  fast_finish: true
 
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
