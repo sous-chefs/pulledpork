@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: pulledpork
+# Cookbook:: pulledpork
 # Recipe:: default
 #
 # Copyright:: 2015-2018, Tim Smith
