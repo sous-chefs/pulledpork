@@ -9,7 +9,6 @@ source_url        'https://github.com/sous-chefs/pulledpork' if respond_to?(:sou
 issues_url        'https://github.com/sous-chefs/pulledpork/issues' if respond_to?(:issues_url)
 chef_version      '>= 12.0' if respond_to?(:chef_version)
 
-
 supports 'debian', '>= 9.0'
 supports 'ubuntu', '>= 16.04'
 supports 'redhat', '>= 6'

@@ -18,10 +18,10 @@ platforms:
   - name: ubuntu-16.04
 
 suites:
-- name: default
-  run_list:
-    - recipe[test::default]
-  attributes:
-    pulledpork:
-      rule_url_array:
-        - 'https://snort.org/downloads/community/|community-rules.tar.gz|Community'
+  - name: default
+    run_list:
+      - recipe[test::default]
+    attributes:
+      pulledpork:
+        rule_url_array:
+          - 'https://snort.org/downloads/community/|community-rules.tar.gz|Community'
