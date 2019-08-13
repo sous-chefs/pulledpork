@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the pulledpork cookbook.
 
+## Unreleased
+
+- Latest cookstyle fixes
+- Porting to circleci tests
+
 ## v2.0.0 (2016-06-10)
 
 - Broke out the default recipe into parts that are easier to consume in wrapper cookbooks
