@@ -16,11 +16,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-case node['platform_family']
-when 'debian'
+if node['platform_family'] == 'debian'
   default['pulledpork']['dependencies'] = %w(libcrypt-ssleay-perl liblwp-useragent-determined-perl)
   default['pulledpork']['snort_svc_name'] = 'snort'
-when 'rhel'
+else
   default['pulledpork']['dependencies'] = %w(perl-libwww-perl perl-Crypt-SSLeay perl-Archive-Tar perl-Sys-Syslog perl-LWP-Protocol-https)
   default['pulledpork']['snort_svc_name'] = 'snortd'
 end
@@ -33,7 +32,6 @@ default['pulledpork']['artifact_url'] =
 
 # without any rule_urls defined in this array pulled pork will fail to run
 default['pulledpork']['rule_url_array'] = [
-
 ]
 
 # this is an array of hashes that contains the disable rule as the key and a comment as the value.
