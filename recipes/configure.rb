@@ -1,4 +1,3 @@
-
 template node['pulledpork']['disablesid'] do
   source 'disablesid.conf.erb'
   mode '0640'
