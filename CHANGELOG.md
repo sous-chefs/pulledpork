@@ -2,6 +2,22 @@
 
 This file is used to list changes made in each version of the pulledpork cookbook.
 
+## Unreleased
+
+- Fix restarts of snort under systemd
+- Use pulledpork 0.7.3 now
+- Migrate the maintainer of this cookbook to Sous Chefs
+- Add CircleCI and Danger (#3)
+- Update community rules URL for testing
+- Switch to delivery local mode for testing
+- Switch integration testing from kitchen-docker to kitchen-dokken
+- Add a code of conduct file
+- Avoid ChefSpec deprecation warnings
+- Move templates out of default dir
+- Move templates out of default dir
+- Update testing for the new snort cookbook
+- Simplify the install
+
 ## v2.0.0 (2016-06-10)
 
 - Broke out the default recipe into parts that are easier to consume in wrapper cookbooks
