@@ -1,4 +1,4 @@
-# chef-pulledpork
+# chef pulledpork
 
 [![Cookbook Version](https://img.shields.io/cookbook/v/pulledpork.svg)](https://supermarket.chef.io/cookbooks/pulledpork)
 [![Build Status](https://img.shields.io/circleci/project/github/sous-chefs/pulledpork/master.svg)](https://circleci.com/gh/sous-chefs/pulledpork)
@@ -32,7 +32,7 @@ This cookbook is maintained by the Sous Chefs. The Sous Chefs are a community of
 
 Before this cookbook can run you must have a working copy of Snort. The default attributes of this cookbook assume the snort paths from a package install as done in the snort cookbook. If you install via source you'll want to set these attributes to the source paths.
 
-You will need to set the rule_url_array attribute for pulledpork to run. The attribute defaults to nil to give full control over the rules you run. The Kitchen CI setup uses '<https://s3.amazonaws.com/snort-org/www/rules/community/|community-rules.tar.gz|Community>' which provides open source community rules.
+You will need to set the rule_url_array attribute for pulledpork to run. The attribute defaults to nil to give full control over the rules you run. The Kitchen CI setup uses <https://s3.amazonaws.com/snort-org/www/rules/community/|community-rules.tar.gz|Community> which provides open source community rules.
 
 ## Contributors
 
