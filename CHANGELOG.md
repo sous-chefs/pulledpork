@@ -17,6 +17,7 @@ This file is used to list changes made in each version of the pulledpork cookboo
 - Move templates out of default dir
 - Update testing for the new snort cookbook
 - Simplify the install
+- Migrate to actions
 
 ## v2.0.0 (2016-06-10)
 
