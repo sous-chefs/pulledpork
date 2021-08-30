@@ -10,7 +10,8 @@ transport:
 
 provisioner:
   name: dokken
-  deprecations_as_errors: true
+  # TODO: disable until upstream cookbooks enable unified_mode
+  # deprecations_as_errors: true
 
 platforms:
   - name: amazonlinux
