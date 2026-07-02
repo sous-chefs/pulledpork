@@ -20,8 +20,8 @@ case node['platform_family']
 when 'debian'
   default['pulledpork']['dependencies'] = %w(libcrypt-ssleay-perl liblwp-useragent-determined-perl)
   default['pulledpork']['snort_svc_name'] = 'snort'
-when 'rhel'
-  default['pulledpork']['dependencies'] = %w(perl-libwww-perl perl-Crypt-SSLeay perl-Archive-Tar perl-Sys-Syslog perl-LWP-Protocol-https)
+when 'amazon', 'rhel'
+  default['pulledpork']['dependencies'] = %w(perl-libwww-perl perl-Crypt-SSLeay perl-Archive-Tar perl-File-Copy perl-Sys-Syslog perl-LWP-Protocol-https tar)
   default['pulledpork']['snort_svc_name'] = 'snortd'
 end
 

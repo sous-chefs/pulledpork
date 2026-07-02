@@ -29,6 +29,7 @@ end
 execute 'run_pulledpork' do
   command "/usr/local/bin/pulledpork.pl -c #{node['pulledpork']['pp_config_path']} -l"
   action :nothing
+  only_if { node['pulledpork']['rule_url_array'].any? }
   notifies :restart, "service[#{node['pulledpork']['snort_svc_name']}]", :immediately
 end
 
