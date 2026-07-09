@@ -16,34 +16,43 @@ jobs:
       pull-requests: write
       statuses: write
       issues: write
+    secrets: inherit
 
   integration:
     needs: "lint-unit"
 
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
+      max-parallel: 4
       matrix:
         os:
-          - "amazonlinux"
-          - "debian-8"
-          - "debian-9"
-          - "centos-6"
-          - "centos-7"
-          - "ubuntu-1604"
+          - "almalinux-8"
+          - "almalinux-9"
+          - "amazonlinux-2023"
+          - "centos-stream-9"
+          - "debian-12"
+          - "oraclelinux-8"
+          - "oraclelinux-9"
+          - "rockylinux-8"
+          - "rockylinux-9"
+          - "ubuntu-2204"
+          - "ubuntu-2404"
         suite:
           - "default"
-      fail-fast: false
 
     steps:
       - name: Check out code
         uses: actions/checkout@v7
-      - name: Install Chef
-        uses: actionshub/chef-install@6.0.0
+      - name: Install Cinc Workstation
+        uses: sous-chefs/.github/.github/actions/install-workstation@8.0.4
       - name: Dokken
-        uses: actionshub/test-kitchen@3.0.0
+        uses: actionshub/test-kitchen@main
         env:
           CHEF_LICENSE: accept-no-persist
+          CHEF_VERSION: latest
           KITCHEN_LOCAL_YAML: kitchen.dokken.yml
+          KITCHEN_PRODUCT_NAME: cinc
         with:
           suite: ${{ matrix.suite }}
           os: ${{ matrix.os }}

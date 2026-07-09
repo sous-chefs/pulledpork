@@ -1,4 +1,6 @@
 # install packages needed by pulledpork
+yum_epel 'default' if platform_family?('rhel')
+
 package node['pulledpork']['dependencies']
 
 ark 'pulledpork' do
