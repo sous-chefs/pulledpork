@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.12](https://github.com/sous-chefs/pulledpork/compare/v3.0.11...v3.0.12) (2026-08-15)
+
+
+### Bug Fixes
+
+* **ci:** Update workflows to use release pipeline ([#60](https://github.com/sous-chefs/pulledpork/issues/60)) ([a91c32d](https://github.com/sous-chefs/pulledpork/commit/a91c32da5a55a70a81a6708cb00d8857a339a7dd))
+* migrate to Policyfile ([#72](https://github.com/sous-chefs/pulledpork/issues/72)) ([1b1db0d](https://github.com/sous-chefs/pulledpork/commit/1b1db0dfa2464ff8acf79ffeea037e5b3d83da0a))
+
 ## [3.0.11](https://github.com/sous-chefs/pulledpork/compare/v3.0.10...v3.0.11) (2025-10-16)
 
 
