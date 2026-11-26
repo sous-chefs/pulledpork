@@ -16,7 +16,7 @@ Amazon Linux, and Enterprise Linux compatible releases declared in
 
 ## Integration Tests
 
-The default Kitchen suite leaves `node['pulledpork']['rule_url_array']` empty.
+The default Kitchen suite leaves `pulledpork_config.rule_urls` empty.
 This intentionally validates convergence without depending on rate-limited
-external Snort community rule downloads. Set `rule_url_array` explicitly when
+external Snort community rule downloads. Set `rule_urls` explicitly when
 testing a real PulledPork rule update.
