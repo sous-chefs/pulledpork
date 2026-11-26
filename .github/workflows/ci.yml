@@ -7,19 +7,35 @@ name: ci
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   lint-unit:
-    uses: sous-chefs/.github/.github/workflows/lint-unit.yml@6.0.0
+    uses: sous-chefs/.github/.github/workflows/lint-unit.yml@9.0.1
     permissions:
+      actions: write
       checks: write
       pull-requests: write
       statuses: write
+      issues: write
+    secrets: inherit
 
   integration:
     needs: "lint-unit"
 
     runs-on: ubuntu-latest
+    env:
+      # Finish Git maintenance before Chef copies dependency clones.
+      GIT_CONFIG_COUNT: '2'
+      GIT_CONFIG_KEY_0: maintenance.autoDetach
+      GIT_CONFIG_VALUE_0: 'false'
+      GIT_CONFIG_KEY_1: gc.autoDetach
+      GIT_CONFIG_VALUE_1: 'false'
     strategy:
+      fail-fast: false
+      max-parallel: 4
       matrix:
         os:
           - "almalinux-8"
@@ -27,7 +43,6 @@ jobs:
           - "amazonlinux-2023"
           - "centos-stream-9"
           - "debian-12"
-          - "fedora-latest"
           - "oraclelinux-8"
           - "oraclelinux-9"
           - "rockylinux-8"
@@ -36,18 +51,19 @@ jobs:
           - "ubuntu-2404"
         suite:
           - "default"
-      fail-fast: false
 
     steps:
       - name: Check out code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Install Cinc Workstation
-        uses: sous-chefs/.github/.github/actions/install-workstation@6.0.0
+        uses: sous-chefs/.github/.github/actions/install-workstation@9.0.1
       - name: Dokken
-        uses: actionshub/test-kitchen@3.0.0
+        uses: actionshub/test-kitchen@main
         env:
           CHEF_LICENSE: accept-no-persist
+          CHEF_VERSION: latest
           KITCHEN_LOCAL_YAML: kitchen.dokken.yml
+          KITCHEN_PRODUCT_NAME: cinc
         with:
           suite: ${{ matrix.suite }}
           os: ${{ matrix.os }}

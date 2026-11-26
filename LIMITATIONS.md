@@ -15,7 +15,7 @@ and installs runtime Perl dependencies from the operating system package reposit
 
 * Amazon Linux 2023, Enterprise Linux 8 and 9 derivatives, and Fedora: installs
   `perl-libwww-perl`, `perl-Crypt-SSLeay`, `perl-Archive-Tar`, `perl-Sys-Syslog`,
-  and `perl-LWP-Protocol-https`.
+  and `perl-LWP-Protocol-https`. Amazon Linux 2023, Enterprise Linux 9 and Fedora also install `perl-File-Copy`.
 * CentOS Linux 7 and CentOS Stream 8 are not included because they are end of life.
 
 ### Zypper (SUSE)

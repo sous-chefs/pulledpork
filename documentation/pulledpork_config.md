@@ -33,6 +33,10 @@ Renders PulledPork configuration files and prepares the Snort shared object rule
 | `snort_service_name`  | String      | Platform dependent                               | Snort service to restart after updates.          |
 | `run_on_update`       | true, false | `true`                                           | Run `pulledpork.pl` when configuration changes.  |
 
+The delete action leaves the shared `os-linux.so` file in place for Snort.
+
+Set `executable_path` to the installed `pulledpork.pl` if it differs from `/usr/local/bin/pulledpork.pl`.
+
 ## Examples
 
 ```ruby

@@ -20,7 +20,7 @@ describe 'pulledpork_config' do
     it { is_expected.to create_directory('/etc/snort/rules/iplists').with(recursive: true, mode: '0755') }
     it { is_expected.to create_directory('/var/log/snort').with(recursive: true, mode: '0755') }
     it { is_expected.to nothing_service('snort') }
-    it { is_expected.to nothing_execute('run_pulledpork').with(command: '/usr/local/bin/pulledpork.pl -c /etc/snort/pulledpork.conf -l') }
+    it { is_expected.to nothing_execute('run_pulledpork').with(command: %w(/usr/local/bin/pulledpork.pl -c /etc/snort/pulledpork.conf -l)) }
     it { is_expected.to create_template('/etc/snort/disablesid.conf').with(mode: '0640') }
     it { is_expected.to create_template('/etc/snort/pulledpork.conf').with(mode: '0640') }
     it { is_expected.to create_directory('/usr/lib/snort_dynamicrules/').with(recursive: true, mode: '0755') }
@@ -57,8 +57,19 @@ describe 'pulledpork_config' do
       end
     end
 
-    it { is_expected.to delete_file('/etc/snort/disablesid.conf') }
+    it { is_expected.not_to delete_file('/etc/snort/disablesid.conf') }
     it { is_expected.to delete_file('/etc/snort/pulledpork.conf') }
-    it { is_expected.to delete_file('/usr/lib/snort_dynamicrules/os-linux.so') }
+    it { is_expected.not_to delete_file('/usr/lib/snort_dynamicrules/os-linux.so') }
+
+    context 'with managed disabled SIDs' do
+      recipe do
+        pulledpork_config '/etc/snort/pulledpork.conf' do
+          disabled_sids [{ '129:4:1' => 'TCP timestamp outside PAWS window' }]
+          action :delete
+        end
+      end
+
+      it { is_expected.to delete_file('/etc/snort/disablesid.conf') }
+    end
   end
 end

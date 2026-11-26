@@ -9,6 +9,10 @@ property :config_path, String,
           name_property: true,
           description: 'Path to pulledpork.conf'
 
+property :executable_path, String,
+          default: '/usr/local/bin/pulledpork.pl',
+          description: 'Path to the installed PulledPork executable'
+
 property :rule_urls, Array,
           default: [],
           description: 'PulledPork rule_url entries'
@@ -84,31 +88,16 @@ property :run_on_update, [true, false],
 
 action_class do
   include Pulledpork::Cookbook::Helpers
-
-  def run_pulledpork_command
-    "/usr/local/bin/pulledpork.pl -c #{new_resource.config_path} -l"
-  end
 end
 
 action :create do
-  directory ::File.dirname(new_resource.config_path) do
-    recursive true
-    mode '0755'
-  end
-
-  directory ::File.dirname(new_resource.rule_path) do
-    recursive true
-    mode '0755'
-  end
-
-  directory ::File.dirname(new_resource.black_list) do
-    recursive true
-    mode '0755'
-  end
-
-  directory ::File.dirname(new_resource.sid_changelog) do
-    recursive true
-    mode '0755'
+  paths = [new_resource.config_path, new_resource.rule_path, new_resource.black_list, new_resource.sid_changelog]
+  paths.map { |path| ::File.dirname(path) }.push(new_resource.sorule_path).uniq.each do |path|
+    directory path do
+      recursive true
+      mode '0755'
+      not_if { ::File.directory?(path) }
+    end
   end
 
   service new_resource.snort_service_name do
@@ -116,9 +105,9 @@ action :create do
   end
 
   execute 'run_pulledpork' do
-    command run_pulledpork_command
+    command [new_resource.executable_path, '-c', new_resource.config_path, '-l']
     action :nothing
-    only_if { new_resource.run_on_update }
+    only_if { new_resource.run_on_update && !new_resource.rule_urls.empty? }
     notifies :restart, "service[#{new_resource.snort_service_name}]", :immediately
   end
 
@@ -156,11 +145,6 @@ action :create do
     notifies :run, 'execute[run_pulledpork]'
   end
 
-  directory new_resource.sorule_path do
-    mode '0755'
-    recursive true
-  end
-
   cookbook_file ::File.join(new_resource.sorule_path, 'os-linux.so') do
     cookbook 'pulledpork'
     source 'default_so_rule'
@@ -172,13 +156,10 @@ end
 action :delete do
   file new_resource.disablesid_path do
     action :delete
+    not_if { new_resource.disabled_sids.empty? }
   end
 
   file new_resource.config_path do
-    action :delete
-  end
-
-  file ::File.join(new_resource.sorule_path, 'os-linux.so') do
     action :delete
   end
 end

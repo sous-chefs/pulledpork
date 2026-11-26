@@ -18,7 +18,7 @@ property :dependencies, Array,
           description: 'Packages required to run PulledPork'
 
 property :install_path, String,
-          default: lazy { "/usr/local/pulledpork-#{version}" },
+          default: lazy { ::File.join(prefix_root, "pulledpork-#{version}") },
           description: 'Versioned install path'
 
 property :prefix_root, String,
@@ -35,17 +35,32 @@ property :backup, [false, Integer],
 
 action_class do
   include Pulledpork::Cookbook::Helpers
+
+  def points_to?(link_path, target_path)
+    ::File.expand_path(::File.readlink(link_path), ::File.dirname(link_path)) == ::File.expand_path(target_path)
+  rescue Errno::ENOENT, Errno::EINVAL
+    false
+  end
 end
 
 action :install do
   raise "The platform #{node['platform']} is not supported by pulledpork_install" if new_resource.dependencies.nil?
 
+  yum_epel 'default' if platform_family?('rhel')
   package new_resource.dependencies
+
+  [new_resource.prefix_root, new_resource.prefix_bin].uniq.each do |path|
+    directory path do
+      recursive true
+    end
+  end
 
   ark 'pulledpork' do
     url new_resource.artifact_url
     version new_resource.version
+    path new_resource.install_path
     prefix_root new_resource.prefix_root
+    prefix_home new_resource.prefix_root
     prefix_bin new_resource.prefix_bin
     has_binaries %w(pulledpork.pl)
     backup new_resource.backup
@@ -57,12 +72,18 @@ action :install do
 end
 
 action :remove do
-  link ::File.join(new_resource.prefix_root, 'pulledpork') do
+  home_link = ::File.join(new_resource.prefix_root, 'pulledpork')
+  bin_link = ::File.join(new_resource.prefix_bin, 'pulledpork.pl')
+  executable = ::File.join(new_resource.install_path, 'pulledpork.pl')
+
+  link home_link do
     action :delete
+    only_if { points_to?(home_link, new_resource.install_path) }
   end
 
-  link ::File.join(new_resource.prefix_bin, 'pulledpork.pl') do
+  link bin_link do
     action :delete
+    only_if { points_to?(bin_link, executable) }
   end
 
   directory new_resource.install_path do

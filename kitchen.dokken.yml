@@ -1,10 +1,14 @@
 driver:
   name: dokken
   privileged: true
-  chef_version: <%= ENV['CHEF_VERSION'] || 'current' %>
+  chef_image: "<%= ENV.fetch('KITCHEN_PRODUCT_NAME', 'cinc') == 'cinc' ? 'cincproject/cinc' : 'chef/chef' %>"
+  chef_version: "<%= ENV['CHEF_VERSION'] || (ENV.fetch('KITCHEN_PRODUCT_NAME', 'cinc') == 'cinc' ? 'latest' : 'current') %>"
 
 transport: { name: dokken }
-provisioner: { name: dokken }
+provisioner:
+  name: dokken
+  chef_binary: "<%= ENV.fetch('KITCHEN_PRODUCT_NAME', 'cinc') == 'cinc' ? '/opt/cinc/bin/cinc-client' : '/opt/chef/bin/chef-client' %>"
+  product_name: "<%= ENV['KITCHEN_PRODUCT_NAME'] || 'cinc' %>"
 
 platforms:
   - name: almalinux-8
@@ -17,6 +21,11 @@ platforms:
       image: dokken/almalinux-9
       pid_one_command: /usr/lib/systemd/systemd
 
+  - name: amazonlinux-2023
+    driver:
+      image: dokken/amazonlinux-2023
+      pid_one_command: /usr/lib/systemd/systemd
+
   - name: centos-stream-9
     driver:
       image: dokken/centos-stream-9
@@ -26,11 +35,6 @@ platforms:
     driver:
       image: dokken/debian-12
       pid_one_command: /bin/systemd
-
-  - name: amazonlinux-2023
-    driver:
-      image: dokken/amazonlinux-2023
-      pid_one_command: /usr/lib/systemd/systemd
 
   - name: oraclelinux-8
     driver:
@@ -50,11 +54,6 @@ platforms:
   - name: rockylinux-9
     driver:
       image: dokken/rockylinux-9
-      pid_one_command: /usr/lib/systemd/systemd
-
-  - name: fedora-latest
-    driver:
-      image: dokken/fedora-latest
       pid_one_command: /usr/lib/systemd/systemd
 
   - name: ubuntu-22.04

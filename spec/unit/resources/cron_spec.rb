@@ -24,6 +24,7 @@ describe 'pulledpork_cron' do
     recipe do
       pulledpork_cron 'pulledpork-custom' do
         config_path '/opt/snort/pulledpork.conf'
+        executable_path '/opt/snort tools/bin/pulledpork.pl'
         snort_service_name 'snortd'
         hour 2
         minute 30
@@ -34,7 +35,7 @@ describe 'pulledpork_cron' do
       is_expected.to create_cron('pulledpork-custom').with(
         hour: '2',
         minute: '30',
-        command: '/usr/local/bin/pulledpork.pl -c /opt/snort/pulledpork.conf -l && service snortd restart'
+        command: '/opt/snort\ tools/bin/pulledpork.pl -c /opt/snort/pulledpork.conf -l && service snortd restart'
       )
     end
   end

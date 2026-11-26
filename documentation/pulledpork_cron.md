@@ -18,6 +18,8 @@ Manages the cron job that updates Snort rules with PulledPork.
 | `hour`               | String, Integer | `'12'`                             | Cron hour.                                     |
 | `minute`             | String, Integer | `'0'`                              | Cron minute.                                   |
 
+Set `executable_path` to the installed `pulledpork.pl` if it differs from `/usr/local/bin/pulledpork.pl`.
+
 ## Examples
 
 ```ruby

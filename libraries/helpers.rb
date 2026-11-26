@@ -8,7 +8,9 @@ module Pulledpork
         when 'debian'
           %w(libcrypt-ssleay-perl liblwp-useragent-determined-perl)
         when 'rhel', 'fedora', 'amazon'
-          %w(perl-libwww-perl perl-Crypt-SSLeay perl-Archive-Tar perl-Sys-Syslog perl-LWP-Protocol-https)
+          packages = %w(perl-libwww-perl perl-Crypt-SSLeay perl-Archive-Tar perl-Sys-Syslog perl-LWP-Protocol-https)
+          packages << 'perl-File-Copy' unless node['platform_version'].to_i == 8
+          packages
         end
       end
 

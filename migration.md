@@ -32,4 +32,4 @@ pulledpork_cron 'pulledpork'
 | `node['pulledpork']['snort_svc_name']`                | `snort_service_name` on config and cron resources                         |
 | Other config attributes                               | Matching `pulledpork_config` properties                                   |
 
-The `test/cookbooks/test/recipes/default.rb` recipe shows the supported resource-based usage.
+The `test/fixtures/cookbooks/test/recipes/default.rb` recipe shows the supported resource-based usage.
