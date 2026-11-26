@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0](https://github.com/sous-chefs/pulledpork/compare/v3.0.12...v4.0.0) (2026-11-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate pulledpork to custom resources ([#65](https://github.com/sous-chefs/pulledpork/issues/65))
+
+### Features
+
+* migrate pulledpork to custom resources ([#65](https://github.com/sous-chefs/pulledpork/issues/65)) ([3d76310](https://github.com/sous-chefs/pulledpork/commit/3d76310691e1e5626fe7f18e7c0554f67ca81e4d))
+
 ## [3.0.12](https://github.com/sous-chefs/pulledpork/compare/v3.0.11...v3.0.12) (2026-08-15)
 
 
